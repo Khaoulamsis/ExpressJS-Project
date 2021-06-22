@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+    
+    h2{
+      font-family: 'Algerian';
+      font-size: 40px;
+      text-align: center;
+    }
+    body{
+      background-color: rgb(213, 241, 241);
+    }
+    #map{
+      width:300px;
+      color: white;
+      background-color: black;
+      position: absolute;
+      left: 40%;
+      border-radius: 1px 10px;
+    }
+    table{
+      background-color:black;
+    }
+    th , td{
+      color:white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>La Liste des Visites</h2>
+  <table class="table  table-striped text-center">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Visiteur</th>
+        <th>Monument Visité</th>
+        <th>Date d Visite</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% visite.forEach(function(v){ %>
+            <tr>
+                <td><%= v.id %></td>
+                <td><%= v.visiteur %></td>
+                <td><%= v.monument %></td>
+                <td><%= v.date %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

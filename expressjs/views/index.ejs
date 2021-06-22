@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+    
+    h2{
+      font-family: 'Algerian';
+      font-size: 40px;
+      text-align: center;
+    }
+    body{
+      background-color: rgb(213, 241, 241);
+    }
+    #map{
+      width:300px;
+      color: white;
+      background-color: black;
+      position: absolute;
+      left: 40%;
+      border-radius: 1px 10px;
+    }
+    table{
+      background-color:black;
+    }
+    th , td{
+      color:white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Monuments Historiques au Maroc</h2>
+  <a href="/add" class="btn btn-sm " id="map">Ajouter un Monument</a><br/><br/>
+  <a href="/user" class="btn btn-sm " id="map">Liste des Utilisateurs</a><br/><br/>
+  <a href="/visite" class="btn btn-sm " id="map">Liste des Visites</a><br/><br/>
+  <a href="/map" class="btn btn-sm " id="map">MAP</a><br/><br/>
+  <table class="table  table-striped text-center">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOM</th>
+        <th>LATITUDE</th>
+        <th>LONGITUDE</th>
+        <th>VILLE</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% monument.forEach(function(m){ %>
+            <tr>
+                <td><%= m.id %></td>
+                <td><%= m.nom %></td>
+                <td><%= m.latitude %></td>
+                <td><%= m.longitude %></td>
+                <td><%= m.ville %></td>
+                
+                <td>
+                    <a href="edit/<%= m.id %>" class="btn btn-sm btn-primary">Modifier</a>
+                    <a href="delete/<%= m.id %>" class="btn btn-sm btn-danger">Supprimer</a>
+                    <button type="button" class="btn btn-sm btn-success mappage" onclick="getLocation('<%= m.latitude %>','<%= m.longitude %>')" >Visiter</button>
+                </td>
+            </tr>
+        <% }); %>
+    </tbody>
+  </table>
+</div>
+<script>
+  function showPosition(position) {
+      x.innerHTML = "Latitude: " + position.coords.latitude +
+              "<br>Longitude: " + position.coords.longitude;
+  }
+  function getLocation(lat,long) {
+    function showPosition(position) {
+     var x=parseFloat(position.coords.latitude-0.001);
+      var y=parseFloat(position.coords.latitude+0.001);
+      var u=parseFloat(position.coords.longitude-0.001);
+      var v =parseFloat(position.coords.longitude+0.001);
+      if (x<=parseFloat(lat) && parseFloat(lat)<=y  && u<=parseFloat(long)&&parseFloat(long)<=v){
+              alert("Vous êtes en train de visiter ce monument!!");
+  }
+  
+  else{
+    
+    alert("Vous êtes trop loin du monument!!! ");
+  }
+}
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+          alert("Geolocation is not supported by this browser.");
+      }
+  }
+</script>
+</body>
+</html>
